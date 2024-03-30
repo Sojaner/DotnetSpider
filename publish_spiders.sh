@@ -1,2 +1,2 @@
 sh build_spiders.sh
-docker push dotnetspider/spiders:latest
+docker push lucasspider/spiders:latest

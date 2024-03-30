@@ -1,0 +1,47 @@
+name: Package Alpha Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      reference:
+        type: string
+        required: false
+        description: Optional Git Commit SHA
+        default: ""
+
+jobs:
+  startup:
+    name: Startup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: NoorDigitalAgency/release-startup@main
+        with:
+          stage: alpha
+          reference: ${{ github.event.inputs.reference }}
+          token: ${{ github.token }}
+
+  test:
+    name: Test
+    needs: [startup]
+    uses: ./.github/workflows/test-job.yaml
+
+  publish:
+    name: Publish
+    needs: [test]
+    uses: ./.github/workflows/publish-job.yaml
+    with:
+      stage: alpha
+    secrets: inherit
+
+  release:
+    name: Release
+    needs: [publish]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: NoorDigitalAgency/release-lookup@main
+        with:
+          token: ${{ github.token }}
+      - uses: NoorDigitalAgency/release-publish@main
+        with:
+          stage: alpha
+          token: ${{ github.token }}

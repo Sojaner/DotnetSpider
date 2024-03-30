@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  dotnetspider.portal:
-    image: 'dotnetspider/portal:latest'
+  lucasspider.portal:
+    image: 'lucasspider/portal:latest'
     restart: always
-    container_name: dotnetspider.portal
+    container_name: lucasspider.portal
     ports:
       - '7896:7896'

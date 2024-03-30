@@ -1,13 +1,13 @@
-# DotnetSpider
+# LucasSpider
 
 免责申明：本框架是为了帮助开发人员简化开发流程、提高开发效率，请勿使用此框架做任何违法国家法律的事情，使用者所做任何事情也与本框架的作者无关。
 
-[![Build Status](https://dev.azure.com/zlzforever/DotnetSpider/_apis/build/status/dotnetcore.DotnetSpider?branchName=master)](https://dev.azure.com/zlzforever/DotnetSpider/_build/latest?definitionId=3&branchName=master)
-[![NuGet](https://img.shields.io/nuget/vpre/DotnetSpider.svg)](https://www.nuget.org/packages/DotnetSpider)
+[![Build Status](https://dev.azure.com/zlzforever/LucasSpider/_apis/build/status/dotnetcore.LucasSpider?branchName=master)](https://dev.azure.com/zlzforever/LucasSpider/_build/latest?definitionId=3&branchName=master)
+[![NuGet](https://img.shields.io/nuget/vpre/LucasSpider.svg)](https://www.nuget.org/packages/LucasSpider)
 [![Member project of .NET Core Community](https://img.shields.io/badge/member%20project%20of-NCC-9e20c9.svg)](https://github.com/dotnetcore)
-[![GitHub license](https://img.shields.io/github/license/dotnetcore/DotnetSpider.svg)](https://github.com/dotnetcore/DotnetSpider/blob/master/LICENSE.txt)
+[![GitHub license](https://img.shields.io/github/license/dotnetcore/LucasSpider.svg)](https://github.com/dotnetcore/LucasSpider/blob/master/LICENSE.txt)
 
-DotnetSpider, a .NET Standard web crawling library. It is a lightweight, efficient, and fast high-level web crawling & scraping framework.
+LucasSpider, a .NET Standard web crawling library. It is a lightweight, efficient, and fast high-level web crawling & scraping framework.
 
 If you want to get the latest beta packages, you should add the myget feed:
 
@@ -17,7 +17,7 @@ If you want to get the latest beta packages, you should add the myget feed:
 
 ### DESIGN
 
-![DESIGN IMAGE](https://github.com/dotnetcore/DotnetSpider/blob/master/images/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E7%B3%BB%E7%BB%9F.png?raw=true)
+![DESIGN IMAGE](https://github.com/dotnetcore/LucasSpider/blob/master/images/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E7%B3%BB%E7%BB%9F.png?raw=true)
 
 ### DEVELOP ENVIROMENT
 
@@ -60,19 +60,19 @@ If you want to get the latest beta packages, you should add the myget feed:
 
 ### MORE DOCUMENTS
 
-https://github.com/dotnetcore/DotnetSpider/wiki
+https://github.com/dotnetcore/LucasSpider/wiki
 
 ### SAMPLES
 
-    Please see the Project DotnetSpider.Sample in the solution.
+    Please see the Project LucasSpider.Sample in the solution.
 
 ### BASE USAGE
 
-[Base usage Codes](https://github.com/zlzforever/DotnetSpider/blob/master/src/DotnetSpider.Sample/samples/BaseUsage.cs)
+[Base usage Codes](https://github.com/zlzforever/LucasSpider/blob/master/src/LucasSpider.Sample/samples/BaseUsage.cs)
 
 ### ADDITIONAL USAGE: Configurable Entity Spider
 
-[View complete Codes](https://github.com/zlzforever/DotnetSpider/blob/master/src/DotnetSpider.Sample/samples/EntitySpider.cs)
+[View complete Codes](https://github.com/zlzforever/LucasSpider/blob/master/src/LucasSpider.Sample/samples/EntitySpider.cs)
 
 ````csharp
 public class EntitySpider : Spider
@@ -176,7 +176,7 @@ public class EntitySpider : Spider
 #### Distributed spider
 
 
-[Read this document](https://github.com/dotnetcore/DotnetSpider/wiki/3-Distributed-Spider)
+[Read this document](https://github.com/dotnetcore/LucasSpider/wiki/3-Distributed-Spider)
 
 #### Puppeteer downloader
 

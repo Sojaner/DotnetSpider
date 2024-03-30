@@ -1,0 +1,42 @@
+name: Package Beta Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      reference:
+          type: string
+          required: false
+          description: Optional Alpha Version
+          default: ''
+
+jobs:
+  startup:
+    name: Startup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: NoorDigitalAgency/release-startup@main
+        with:
+          stage: beta
+          reference: ${{ github.event.inputs.reference }}
+          token: ${{ github.token }}
+
+  publish:
+    name: Publish Package
+    needs: [startup]
+    uses: ./.github/workflows/publish-job.yaml
+    with:
+      stage: beta
+    secrets: inherit
+
+  release:
+    name: Release
+    needs: [publish]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: NoorDigitalAgency/release-lookup@main
+        with:
+          token: ${{ github.token }}
+      - uses: NoorDigitalAgency/release-publish@main
+        with:
+          stage: beta
+          token: ${{ github.token }}

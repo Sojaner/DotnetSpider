@@ -1,0 +1,44 @@
+name: .NET Test Job
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - if: github.event_name != 'pull_request'
+        uses: NoorDigitalAgency/release-lookup@main
+        with:
+          token: ${{ github.TOKEN }}
+
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name != 'pull_request' && env.RELEASE_REFERENCE || github.event.pull_request.head.ref }}
+          submodules: recursive
+          token: ${{ github.TOKEN }}
+
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: |
+            8.0.x
+
+      - id: test
+        run: |
+          cd ./docker-compose
+          echo TZ=Europe/Stockholm > .env
+          docker compose --env-file .env -f docker-compose.yaml up -d
+          cd ../src/LucasSpider.Tests
+          path="$(pwd)/test-results" && echo "::set-output name=path::$path"
+          dotnet test --logger "trx;logfilename=$path/test-reports.trx"
+
+      - if: ${{ always() }}
+        run: |
+          path="${{ steps.test.outputs.path }}"
+          [ -f "$path/test-reports.trx" ] && \
+            dotnet tool install --global --prerelease LiquidTestReports.Cli && \
+            liquid --inputs "File=$path/test-reports.trx;Format=Trx" --output-file "$path/test-reports.md" && \
+            cat "$path/test-reports.md" >> $GITHUB_STEP_SUMMARY || \
+            echo "::warning::No Unit Tests were found in the project!"

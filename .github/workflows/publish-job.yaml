@@ -1,0 +1,41 @@
+name: NuGet Publish Job
+
+on:
+  workflow_call:
+    inputs:
+      stage:
+        description: Current stage name
+        required: true
+        type: string
+
+jobs:
+  publish:
+    name: Publish NuGet
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.stage }}
+    steps:
+      - uses: NoorDigitalAgency/release-lookup@main
+        with:
+          token: ${{ github.token }}
+
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ env.RELEASE_REFERENCE }}
+          submodules: recursive
+          token: ${{ github.token }}
+
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '8.0.x'
+
+      - if: inputs.stage == 'alpha'
+        run: dotnet pack -c Debug --include-source -o outputs -p:Version=${{ env.RELEASE_PLAIN_VERSION }} -p:RepositoryUrl=${{ github.event.repository.html_url }}
+
+      - if: inputs.stage != 'alpha'
+        run: dotnet pack -c Release -o outputs -p:Version=${{ env.RELEASE_PLAIN_VERSION }} -p:RepositoryUrl=${{ github.event.repository.html_url }}
+
+      - run: |
+            for package in ./outputs/*.nupkg
+            do
+              dotnet nuget push $package --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+            done

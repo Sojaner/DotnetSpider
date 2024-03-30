@@ -1,2 +1,2 @@
 sh build_agent.sh
-docker push dotnetspider/agent:latest
+docker push lucasspider/agent:latest

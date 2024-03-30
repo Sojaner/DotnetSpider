@@ -1,2 +1,2 @@
 sh build_portal.sh
-docker push dotnetspider/portal:latest
+docker push lucasspider/portal:latest
