@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using LucasSpider.DataFlow;
 using LucasSpider.DataFlow.Parser;
 using LucasSpider.Downloader;
-using LucasSpider.Http;
 using LucasSpider.Infrastructure;
 using LucasSpider.Scheduler;
 using LucasSpider.Scheduler.Component;
@@ -30,7 +29,7 @@ namespace LucasSpider.Sample.samples
 				x.Batch = 1;
 				x.Speed = 1;
 				x.Depth = 1;
-				x.DefaultTimeout = 5000;
+				x.DefaultTimeout = 15000;
 				x.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
 				x.RetriedTimes = 0;
 			});
